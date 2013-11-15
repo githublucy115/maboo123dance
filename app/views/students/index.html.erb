@@ -1,6 +1,6 @@
 <div class='span11'>
 	<h1>List of Students</h1>
-	<table id='students' class='table table-hover table-striped'>
+	<table id='boot' class='table table-hover table-striped'>
 		<thead>
 			<tr>
 				<th>Last Name</th>
@@ -10,18 +10,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr class='unpaid'>
-				<td><%= "Homer Simpson" %></td>
-				<td>Unpaid</td>
-				<td>- $12.50</td>
+			<% @students.each do |student| %>
+			<tr <%=Random.rand(20)>12?"class='unpaid'": "" %>>
+				<td><%= student.name.split.last %></td>
+				<td><%= student.name.split.first %></td>
+				<td>$<%= number_with_precision(student.balance || 0,:precision=>2) %></td>
 				<td>2 Weeks Ago</td>
-			</tr>
-			<% 20.times do %>
-			<tr>
-				<td>Student</td>
-				<td>Test</td>
-				<td>$0.00</td>
-				<td>Yesterday</td>
 			</tr>
 			<% end %>
 		</tbody>

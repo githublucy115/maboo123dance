@@ -1,0 +1,11 @@
+.theader {
+	font-weight: bold;
+}
+
+table#boot>tbody>tr.unpaid>td {
+	background-color: #FAA;
+}
+
+table#boot>tbody>tr.unpaid:hover>td {
+	background-color: #EAA;
+}

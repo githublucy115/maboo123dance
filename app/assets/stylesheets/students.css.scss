@@ -2,14 +2,3 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.theader {
-	font-weight: bold;
-}
-
-table#students>tbody>tr.unpaid>td {
-	background-color: #FAA;
-}
-
-table#students>tbody>tr.unpaid:hover>td {
-	background-color: #EAA;
-}

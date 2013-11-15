@@ -3,6 +3,7 @@ class CreatePayments < ActiveRecord::Migration
     create_table :payments do |t|
       t.integer :student_id
       t.decimal :amount
+      t.decimal :previous
 
       t.timestamps
     end

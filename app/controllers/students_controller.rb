@@ -25,6 +25,8 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
+    @student.balance = 0.00
+    @student.credit = 0.00
 
     respond_to do |format|
       if @student.save
@@ -69,6 +71,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name)
+      params.require(:student).permit(:name,:email,:balance,:credit)
     end
 end

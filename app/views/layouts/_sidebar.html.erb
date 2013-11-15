@@ -1,27 +1,11 @@
 <div class='span12'>
 	<ul class="nav nav-stacked">
 		<li class="nav-header">Menu</a></li>
-		<li class="active"><a class="list-group-item" href="/students">View student list</a></li>
-		<li><a href="/class_records" class="list-group-item">View class history</a></li>
-		<li><a href="/payments" class="list-group-item">View payment history</a></li>
-		<li><a href="/students/new" class="list-group-item">Add new student</a></li>
-		<li><a href="/class_records/new" class="list-group-item">Add new class</a></li>
-		<li><a href="/payments/new" class="list-group-item">Add manual payment</a></li>
+		<li><%= nav_link("View student list","/students") %></li>
+		<li><%= nav_link("Add new student","/students/new") %></li>
+		<li><%= nav_link("View class history","/classrecords") %></li>
+		<li><%= nav_link("Add new class","/classrecords/new") %></li>
+		<li><%= nav_link("View payment history","/payments") %></li>
+		<li><%= nav_link("Add manual payment","/payments/new") %></li>
 	</ul>
-</div><!-- 
-<hr>
-<ul class="nav nav-stacked submenu">
-	<li class="nav-header">Students</a></li>
-	<li><a class="list-group-item" href="/#">Test Student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a class="list-group-item" href="/#">Test Student<span class="label label-danger">Unpaid balance</span></a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a class="list-group-item" href="/#">Test Student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-	<li><a href="/#" class="list-group-item">Test student</a></li>
-</ul> -->
+</div>

@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115121837) do
+ActiveRecord::Schema.define(version: 20131115173029) do
 
-  create_table "class_records", force: true do |t|
+  create_table "appointments", force: true do |t|
+    t.integer  "student_id_id"
+    t.integer  "classrecord_id_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "classrecords", force: true do |t|
     t.decimal  "cost"
-    t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -23,19 +29,18 @@ ActiveRecord::Schema.define(version: 20131115121837) do
   create_table "payments", force: true do |t|
     t.integer  "student_id"
     t.decimal  "amount"
+    t.decimal  "previous"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "students", force: true do |t|
     t.string   "name"
+    t.string   "email"
+    t.decimal  "balance"
+    t.integer  "credit"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "students_classrecords", force: true do |t|
-    t.integer "student_id"
-    t.integer "classrecord_id"
   end
 
 end
