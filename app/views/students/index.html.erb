@@ -1,0 +1,29 @@
+<div class='span11'>
+	<h1>List of Students</h1>
+	<table id='students' class='table table-hover table-striped'>
+		<thead>
+			<tr>
+				<th>Last Name</th>
+				<th>First Name</th>
+				<th>Outstanding Balance</th>
+				<th>Last attended</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='unpaid'>
+				<td><%= @students %></td>
+				<td>Unpaid</td>
+				<td>- $12.50</td>
+				<td>2 Weeks Ago</td>
+			</tr>
+			<% 20.times do %>
+			<tr>
+				<td>Student</td>
+				<td>Test</td>
+				<td>$0.00</td>
+				<td>Yesterday</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

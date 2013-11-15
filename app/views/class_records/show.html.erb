@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @class_record.cost %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @class_record.date %>
+</p>
+
+<%= link_to 'Edit', edit_class_record_path(@class_record) %> |
+<%= link_to 'Back', class_records_path %>
