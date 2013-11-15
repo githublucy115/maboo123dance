@@ -1,10 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Cost:</strong>
-  <%= @classrecord.cost %>
-</p>
-
-
-<%= link_to 'Edit', edit_classrecord_path(@classrecord) %> |
-<%= link_to 'Back', classrecords_path %>
+<div class='span11'>
+	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %></h1>
+	<table id='boot' class='table table-hover table-striped'>
+		<thead>
+			<tr>
+				<th>Last Name</th>
+				<th>First Name</th>
+				<th>Outstanding Balance</th>
+				<th>Last attended</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @students.each do |student| %>
+			<tr class='unpaid'>
+				<td><%= student.name %></td>
+				<td><%= student.name %></td>
+				<td><%= student.balance %></td>
+				<td>2 Weeks Ago</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
