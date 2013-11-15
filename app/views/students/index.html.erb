@@ -11,7 +11,7 @@
 		</thead>
 		<tbody>
 			<% @students.each do |student| %>
-			<tr <%=Random.rand(20)>12?"class='unpaid'": "" %>>
+			<tr<%=student.balance < 0 ? " class=unpaid" : "" %>>
 				<td><%= student.name.split.last %></td>
 				<td><%= student.name.split.first %></td>
 				<td>$<%= number_with_precision(student.balance || 0,:precision=>2) %></td>

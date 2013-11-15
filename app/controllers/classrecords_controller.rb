@@ -10,6 +10,7 @@ class ClassrecordsController < ApplicationController
   # GET /classrecords/1
   # GET /classrecords/1.json
   def show
+
   end
 
   # GET /classrecords/new
@@ -25,6 +26,9 @@ class ClassrecordsController < ApplicationController
   # POST /classrecords.json
   def create
     @classrecord = Classrecord.new(classrecord_params)
+    @classrecord.students.each do |student|
+      student.balance = student.balance - @classrecord.cost
+    end
 
     respond_to do |format|
       if @classrecord.save
@@ -69,6 +73,6 @@ class ClassrecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classrecord_params
-      params.require(:classrecord).permit(:cost,:student_ids)
+      params.require(:classrecord).permit(:cost,:student_ids=>[])
     end
 end

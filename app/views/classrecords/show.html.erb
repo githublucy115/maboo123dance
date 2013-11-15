@@ -10,10 +10,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% @students.each do |student| %>
-			<tr class='unpaid'>
-				<td><%= student.name %></td>
-				<td><%= student.name %></td>
+			<% @classrecord.students.each do |student| %>
+			<% student = Student.find(student) %>
+			<tr<%= student.balance < 0 ? " class=unpaid" : "" %>>
+				<td><%= student.lastname %></td>
+				<td><%= student.firstname %></td>
 				<td><%= student.balance %></td>
 				<td>2 Weeks Ago</td>
 			</tr>

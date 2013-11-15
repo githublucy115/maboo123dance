@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20131115173029) do
 
   create_table "appointments", force: true do |t|
-    t.integer  "student_id_id"
-    t.integer  "classrecord_id_id"
+    t.integer  "student_id"
+    t.integer  "classrecord_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
