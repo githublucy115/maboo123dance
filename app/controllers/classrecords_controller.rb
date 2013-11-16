@@ -28,6 +28,7 @@ class ClassrecordsController < ApplicationController
     @classrecord = Classrecord.new(classrecord_params)
     @classrecord.students.each do |student|
       student.balance = student.balance - @classrecord.cost
+      student.save
     end
 
     respond_to do |format|

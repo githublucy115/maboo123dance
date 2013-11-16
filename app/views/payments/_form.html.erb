@@ -1,4 +1,4 @@
-<%= form_for(@payment) do |f| %>
+<%= simple_form_for(@payment) do |f| %>
   <% if @payment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
@@ -11,15 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :student_id %><br>
-    <%= f.number_field :student_id %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% f.association :appointments %>
+  <% f.input :amount %>
+  <% f.button :submit %>
 <% end %>

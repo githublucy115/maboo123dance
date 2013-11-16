@@ -22,12 +22,14 @@ ActiveRecord::Schema.define(version: 20131115173029) do
 
   create_table "classrecords", force: true do |t|
     t.decimal  "cost"
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "payments", force: true do |t|
-    t.integer  "student_id"
+    t.integer  "appointment_id"
+    t.string   "payment_method"
     t.decimal  "amount"
     t.decimal  "previous"
     t.datetime "created_at"

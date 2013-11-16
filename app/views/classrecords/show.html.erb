@@ -12,10 +12,10 @@
 		<tbody>
 			<% @classrecord.students.each do |student| %>
 			<% student = Student.find(student) %>
-			<tr<%= student.balance < 0 ? " class=unpaid" : "" %>>
+			<tr<%= student.in_debt? ? " class=unpaid" : "" %>>
 				<td><%= student.lastname %></td>
 				<td><%= student.firstname %></td>
-				<td><%= student.balance %></td>
+				<td><%= student.balance_precise %></td>
 				<td>2 Weeks Ago</td>
 			</tr>
 			<% end %>

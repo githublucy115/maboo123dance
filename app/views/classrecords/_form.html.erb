@@ -12,6 +12,6 @@
   <% end %>
 
   <%= f.input :cost %>
-  <%= f.association :students %>
+  <%= f.association :students, as: :check_boxes %>
   <%= f.button :submit %>
 <% end %>

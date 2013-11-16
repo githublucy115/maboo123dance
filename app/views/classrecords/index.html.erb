@@ -5,6 +5,7 @@
     <tr>
       <th>Cost</th>
       <th>Date</th>
+      <th>Location</th>
       <th></th>
     </tr>
   </thead>
@@ -12,14 +13,11 @@
   <tbody>
     <% @classrecords.each do |classrecord| %>
       <tr>
-        <td>$<%= classrecord.cost %></td>
-        <td><%= classrecord.created_at.to_time.strftime("%m/%d/%Y") %></td>
+        <td>$<%= number_with_precision(classrecord.cost || 0,:precision=>2) %></td>
+        <td><%= classrecord.date %></td>
+        <td><%= "Berkeley" %></td>
         <td><%= link_to 'View students in this class', classrecord %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Classrecord', new_classrecord_path %>
