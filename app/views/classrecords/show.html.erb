@@ -1,22 +1,24 @@
 <div class='span11'>
 	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %></h1>
-	<table id='boot' class='table table-hover table-striped'>
+	<table class='table table-hover table-striped filterable'>
 		<thead>
 			<tr>
-				<th>Last Name</th>
-				<th>First Name</th>
-				<th>Outstanding Balance</th>
-				<th>Last attended</th>
+				<th class='sort' data-sort='lastname'>Last Name</th>
+				<th class='sort' data-sort='firstname'>First Name</th>
+				<th class='sort' data-sort='balance'>Balance</th>
+				<th class='sort' data-sort='credit'>Credit</th>
+				<th class='sort' data-sort='lastseen'>Last attended</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @classrecord.students.each do |student| %>
 			<% student = Student.find(student) %>
 			<tr<%= student.in_debt? ? " class=unpaid" : "" %>>
-				<td><%= student.lastname %></td>
-				<td><%= student.firstname %></td>
-				<td><%= student.balance_precise %></td>
-				<td>2 Weeks Ago</td>
+				<td class="lastname"><%= student.lastname %></td>
+				<td class="firstname"><%= student.firstname %></td>
+				<td class="balance"><%= number_to_currency(student.balance) %></td>
+				<td class="credit"><%= student.credit %></td>
+				<td class="lastseen">2 Weeks Ago</td>
 			</tr>
 			<% end %>
 		</tbody>

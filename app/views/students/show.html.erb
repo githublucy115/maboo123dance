@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<% data = { :Name => @student.name, :Email => @student.email, :Balance => number_to_currency(@student.balance), :Credit => @student.credit} %>
+<% data.each do |label,val| %>
 <p>
-  <strong>Name:</strong>
-  <%= @student.name %>
+  <strong><%=label%>:</strong>
+  <%= val %>
 </p>
+<% end %>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

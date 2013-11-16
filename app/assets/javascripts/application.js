@@ -26,5 +26,5 @@ resizeDiv();
 function resizeDiv() {
 vpw = $(window).width();
 vph = $(window).height();
-$(‘.content, .sidebar’).css({‘height’: vph + ‘px’});
+$('.content, .sidebar').css({'height': vph + 'px'});
 }

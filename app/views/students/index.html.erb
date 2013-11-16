@@ -1,22 +1,22 @@
 <h1>List of Students</h1>
-<table id='boot' class='table table-hover table-striped'>
+<table id='boot' class='table table-hover table-striped filterable'>
 	<thead>
 		<tr>
 			<th>Last Name</th>
 			<th>First Name</th>
+			<th>Email</th>
 			<th>Balance</th>
 			<th>Dance Credit</th>
-			<th>Last attended</th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @students.each do |student| %>
 		<tr<%=student.in_debt? ? " class=unpaid" : "" %>>
-			<td><%= student.name.split.last %></td>
+			<td><a href=<%= "/students/#{student.id}" %>><%= student.name.split.last %></td>
 			<td><%= student.name.split.first %></td>
-			<td>$<%= student.balance_precise %></td>
+			<td><%= student.email %></td>
+			<td><%= number_to_currency(student.balance) %></td>
 			<td><%= student.credit %></td>
-			<td>2 Weeks Ago</td>
 		</tr>
 		<% end %>
 	</tbody>
