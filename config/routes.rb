@@ -1,7 +1,9 @@
 Maboo123dance::Application.routes.draw do
-  resources :classrecords
+  resources :expenses
 
   resources :payments
+
+  resources :classrecords
 
   resources :students
 

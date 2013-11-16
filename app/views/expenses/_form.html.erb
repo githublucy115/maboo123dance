@@ -1,8 +1,9 @@
-<%= simple_form_for(@payment) do |f| %>
+<%= simple_form_for(@expense) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :student_id %>
+    <%= f.input :classorder_id %>
     <%= f.input :amount %>
   </div>
 
