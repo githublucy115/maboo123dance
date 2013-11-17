@@ -40,7 +40,7 @@ class ClassrecordsController < ApplicationController
             :amount=>0 - @classrecord.cost
             )
           student.balance += t.amount
-          gb_list << [{:EMAIL=>{:email=>"email#{count}"},:FNAME=>student.firstname,:LNAME=>student.lastname}]
+          gb_list << {:EMAIL=>{:email=>"email#{count}"},:FNAME=>student.firstname,:LNAME=>student.lastname}
           student.save
         end
         gb.lists.batch_subscribe(:id=>"0c97387b34",:batch=>gb_list)
