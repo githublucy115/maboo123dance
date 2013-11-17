@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @students = Student.all.sort{|a,b| a.name.split.last <=> b.name.split.last}
   end
 
   # GET /students/1

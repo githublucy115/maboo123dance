@@ -1,6 +1,6 @@
 <div class='span11'>
 	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %></h1>
-	<table class='table table-hover table-striped filterable'>
+	<table id="boot" class='table table-hover table-striped filterable'>
 		<thead>
 			<tr>
 				<th class='sort' data-sort='lastname'>Last Name</th>

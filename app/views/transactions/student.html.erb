@@ -1,0 +1,22 @@
+<h1>Transaction history for <%=@student.name%></h1>
+
+<table class='filterable'>
+	<thead>
+		<tr>
+			<th>Location</th>
+			<th>Date</th>
+			<th>Amount</th>
+			<th>
+		</tr>
+	</thead>
+	<tbody>
+<% @transactions.each do |transaction| %>
+		<tr class=<%=transaction.amount<0 ? "expense" : "payment"%>>
+			<th><%= link_to transaction.class_location classrecord_path(transaction.classrecord_id%></a></th>
+			<th><%=transaction.created_at.to_time.strftime("%m/%d/%Y")%></th>
+			<th><%=number_to_currency(transaction.amount)%></th>
+			<th><%= link_to "Make payment" student_pay_path %>
+		</tr>
+<% end %>
+	</tbody>
+</table>

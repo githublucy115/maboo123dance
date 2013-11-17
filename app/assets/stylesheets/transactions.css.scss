@@ -1,0 +1,12 @@
+// Place all the styles related to the Transactions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table#transactions>tbody>tr.expense>td {
+	background-color: #FAA
+}
+
+table#transactions>tbody>tr.expense:hover>td,
+table#transactions>tbody>tr.expense:focus>td {
+	background-color: #EAA
+}

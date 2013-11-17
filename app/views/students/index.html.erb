@@ -12,10 +12,10 @@
 	<tbody>
 		<% @students.each do |student| %>
 		<tr<%=student.in_debt? ? " class=unpaid" : "" %>>
-			<td><a href=<%= "/students/#{student.id}" %>><%= student.name.split.last %></td>
-			<td><%= student.name.split.first %></td>
+			<td><a href=<%= "/students/#{student.id}" %>><%= student.lastname %></td>
+			<td><a href=<%= "/students/#{student.id}"%>><%= student.firstname %></td>
 			<td><%= student.email %></td>
-			<td><%= number_to_currency(student.balance) %></td>
+			<td><a href=<%="/students/#{student.id}/transactions"%>><%= number_to_currency(student.balance) %></a></td>
 			<td><%= student.credit %></td>
 		</tr>
 		<% end %>

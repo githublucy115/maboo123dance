@@ -26,13 +26,24 @@ class ClassrecordsController < ApplicationController
   # POST /classrecords.json
   def create
     @classrecord = Classrecord.new(classrecord_params)
-    @classrecord.students.each do |student|
-      student.balance = student.balance - @classrecord.cost
-      student.save
-    end
+    gb = Gibbon::API.new('a8a38b57426df6a6713f88035305f442-us3')
+    gb_list = []
+    count = 0
 
     respond_to do |format|
       if @classrecord.save
+        @classrecord.reload.students.each do |student|
+          count += 1
+          t = Transaction.create(
+            :student_id=>student.id,
+            :classrecord_id=>@classrecord.id,
+            :amount=>0 - @classrecord.cost
+            )
+          student.balance += t.amount
+          gb_list << [{:EMAIL=>{:email=>"email#{count}"},:FNAME=>student.firstname,:LNAME=>student.lastname}]
+          student.save
+        end
+        gb.lists.batch_subscribe(:id=>232469,:batch=>gb_list)
         format.html { redirect_to @classrecord, notice: 'Classrecord was successfully created.' }
         format.json { render action: 'show', status: :created, location: @classrecord }
       else

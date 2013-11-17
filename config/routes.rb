@@ -1,11 +1,13 @@
 Maboo123dance::Application.routes.draw do
-  resources :expenses
+  resources :transactions, :only=>[:index]
 
-  resources :payments
+  resources :classrecords, :only=>[:index,:show,:create,:new]
 
-  resources :classrecords
-
-  resources :students
+  resources :students, :only=>[:index,:show,:edit,:create,:new] do
+    member do
+      get :transactions, to: 'transactions#student'
+    end
+  end
 
   root :to => "students#index"
 
