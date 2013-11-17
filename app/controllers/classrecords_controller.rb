@@ -43,7 +43,7 @@ class ClassrecordsController < ApplicationController
           gb_list << [{:EMAIL=>{:email=>"email#{count}"},:FNAME=>student.firstname,:LNAME=>student.lastname}]
           student.save
         end
-        gb.lists.batch_subscribe(:id=>232469,:batch=>gb_list)
+        gb.lists.batch_subscribe(:id=>"0c97387b34",:batch=>gb_list)
         format.html { redirect_to @classrecord, notice: 'Classrecord was successfully created.' }
         format.json { render action: 'show', status: :created, location: @classrecord }
       else
