@@ -1,3 +1,16 @@
 // Place all the styles related to the classrecords controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table#boot>tbody>tr.unpaid>td {
+	background-color: #FAA;
+}
+
+table#boot>tbody>tr.unpaid:hover>td {
+	background-color: #EAA;
+}
+
+.controls>label {
+	width: 200px;
+	display: inline-block;
+}

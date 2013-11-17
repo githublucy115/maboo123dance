@@ -1,9 +1,9 @@
 Maboo123dance::Application.routes.draw do
-  resources :transactions, :only=>[:index]
+  resources :transactions
 
-  resources :classrecords, :only=>[:index,:show,:create,:new]
+  resources :classrecords
 
-  resources :students, :only=>[:index,:show,:edit,:create,:new] do
+  resources :students do
     member do
       get :transactions, to: 'transactions#student'
     end

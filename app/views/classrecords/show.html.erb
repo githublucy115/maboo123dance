@@ -5,20 +5,20 @@
 			<tr>
 				<th class='sort' data-sort='lastname'>Last Name</th>
 				<th class='sort' data-sort='firstname'>First Name</th>
+				<th>Email</th>
 				<th class='sort' data-sort='balance'>Balance</th>
 				<th class='sort' data-sort='credit'>Credit</th>
-				<th class='sort' data-sort='lastseen'>Last attended</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @classrecord.students.each do |student| %>
 			<% student = Student.find(student) %>
 			<tr<%= student.in_debt? ? " class=unpaid" : "" %>>
-				<td class="lastname"><%= student.lastname %></td>
-				<td class="firstname"><%= student.firstname %></td>
-				<td class="balance"><%= number_to_currency(student.balance) %></td>
+				<td class="lastname"><a href=<%="/students/#{student.id}"%>><%= student.lastname %></td>
+				<td class="firstname"><a href=<%="/students/#{student.id}"%>><%= student.firstname %></td>
+				<td><%=student.email%></td>
+				<td class="balance"><a href=<%="/students/#{student.id}/transactions"%>><%= number_to_currency(student.balance) %></td>
 				<td class="credit"><%= student.credit %></td>
-				<td class="lastseen">2 Weeks Ago</td>
 			</tr>
 			<% end %>
 		</tbody>

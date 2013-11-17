@@ -1,10 +1,10 @@
 <div class='span12'>
 	<ul class="nav nav-stacked">
 		<li class="nav-header">Menu</a></li>
-		<li><%= nav_link("View student list","/students") %></li>
-		<li><%= nav_link("Add new student","/students/new") %></li>
-		<li><%= nav_link("View class history","/classrecords") %></li>
-		<li><%= nav_link("Add new class","/classrecords/new") %></li>
-		<li><%= nav_link("View payment history","/transactions") %></li>
+		<li><%= nav_link("View student list",students_path) %></li>
+		<li><%= nav_link("Add new student",new_student_path) %></li>
+		<li><%= nav_link("View class history",classrecords_path) %></li>
+		<li><%= nav_link("Add new class",new_classrecord_path) %></li>
+		<li><%= nav_link("View payment history",transactions_path) %></li>
 	</ul>
 </div>

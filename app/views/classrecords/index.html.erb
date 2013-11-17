@@ -15,7 +15,7 @@
       <tr>
         <td>$<%= number_with_precision(classrecord.cost || 0,:precision=>2) %></td>
         <td><%= classrecord.date %></td>
-        <td><%= "Berkeley" %></td>
+        <td><%= classrecord.location %></td>
         <td><%= link_to 'View students in this class', classrecord %></td>
       </tr>
     <% end %>

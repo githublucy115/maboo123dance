@@ -4,29 +4,34 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @class_location = []
-    @student_name = []
-    @transactions = Transaction.all.sort do |p,e|
+    @transactions = Transaction.all.sort {|p,e|
         a = "created_at"
-        [p,e].each do |t|
-            @class_location[t.id] = Classrecord.find(t.classrecord_id).location
-            @student_name[t.id] = Student.find(t.student_id).name
-        end
         p.send(a) <=> e.send(a)
+    }.reverse
+    @student_list = []
+    @class_list = []
+    @transactions.each do |t|
+      @student_list << Student.find(t.student_id).name
+      @class_list << Classrecord.find(t.classrecord_id).location
     end
   end
 
   def student
     @student = Student.find(params[:id])
-    @class_location = []
-    @transactions = Transaction.find_by_student_id(@student.id).sort do |p,e|
+    @transactions = Transaction.where("student_id = '#{params[:id]}'").sort {|p,e|
         a = "created_at"
-        [p,e].each do |t|
-            @class_location[t.id] = Classrecord.find(t.classrecord_id).location
-        end
         p.send(a) <=> e.send(a)
+    }.reverse
+    @class_list = []
+    @transactions.each do |t|
+      @class_list << Classrecord.find(t.classrecord_id).location
     end
   end
+
+  def pay
+    @expense = Transaction.find(params[:id])
+  end
+
   # GET /transactions/1
   # GET /transactions/1.json
   def show
@@ -47,12 +52,11 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @student = Student.find(@transaction.student_id)
     @student.balance = @student.balance + @transaction.amount
-    binding.pry
     @student.save!
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.html { redirect_to "students/#{@student.id}/transactions", notice: 'Transaction was successfully created.' }
         format.json { render action: 'show', status: :created, location: @transaction }
       else
         format.html { render action: 'new' }

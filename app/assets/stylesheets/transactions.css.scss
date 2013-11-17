@@ -10,3 +10,12 @@ table#transactions>tbody>tr.expense:hover>td,
 table#transactions>tbody>tr.expense:focus>td {
 	background-color: #EAA
 }
+
+table#transactions form {
+	margin: 0;
+}
+
+table#transactions form>input[type=text] {
+	height: 100%;
+	margin:0;
+}
