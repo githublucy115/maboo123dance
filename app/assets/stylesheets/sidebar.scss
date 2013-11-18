@@ -1,11 +1,8 @@
-.navbar {
-	margin-bottom: 0;
-	background-color: #FFF;
-}
-
 #sidebar {
-	height: 630px;
+	height: 100%;
 	border-right: 2px solid #07A;
+	margin: 0;
+	padding: 0;
 }
 
 #sidebar ul>li>a
@@ -14,17 +11,21 @@
 	color: #000;
 }
 
+#sidebar ul>li>a.list-group-item,
+#sidebar ul>li>a.list-group-item:hover,
+#sidebar ul>li>a.list-group-item:focus {
+	border: none;
+	outline: none;
+}
+
 #sidebar>ul {
 	position: fixed;
 }
 
-.cont {
+#cont {
 	width: 100%;
-}
-
-.label-danger {
-	background-color: rgb(217, 83, 79);
-	margin-left: 10px;
+	margin: 0;
+	padding: 0;
 }
 
 .nav-stacked li {

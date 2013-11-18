@@ -10,6 +10,16 @@ table#boot>tbody>tr.unpaid:hover>td {
 	background-color: #EAA;
 }
 
-div#content {
-	height: 120%;
+.height-fix {
+	height: 100%
 }
+
+ #content {
+ 	height: 100%;
+ 	overflow-x: hidden;
+ 	overflow-y: scroll;
+ }
+
+ #content>div {
+ 	padding-bottom: 80px;
+ }

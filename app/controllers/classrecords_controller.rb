@@ -34,16 +34,20 @@ class ClassrecordsController < ApplicationController
       if @classrecord.save
         @classrecord.reload.students.each do |student|
           count += 1
+          method = student.credit > 0 ? :credit : :cash
+          amount = method == :credit ? -1 : -@classrecord.cost
           t = Transaction.create(
             :student_id=>student.id,
             :classrecord_id=>@classrecord.id,
-            :amount=>0 - @classrecord.cost
+            :amount=>amount,
+            :payment_method=>method
             )
-          student.balance += t.amount
+          student.balance += t.amount if method == :cash
+          student.credit += t.credit if method == :credit
           #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
           student.save
         end
-        gb.lists.batch_subscribe(:id=>"0c97387b34",:batch=>gb_list)
+        #gb.lists.batch_subscribe(:id=>"0c97387b34",:batch=>gb_list)
         format.html { redirect_to @classrecord, notice: 'Classrecord was successfully created.' }
         format.json { render action: 'show', status: :created, location: @classrecord }
       else

@@ -14,17 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function(){
-resizeDiv();
-});
-
-window.onresize = function(event) {
-resizeDiv();
-}
-
-function resizeDiv() {
-vpw = $(window).width();
-vph = $(window).height();
-$('.content, .sidebar').css({'height': vph + 'px'});
-}

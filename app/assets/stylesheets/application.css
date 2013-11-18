@@ -12,12 +12,7 @@
  *= require_tree .
  */
 
- body {
+ body, html {
  	overflow: hidden;
- }
-
- .content {
- 	overflow-x: hidden;
- 	overflow-y: scroll;
- 	height: 620px;
+	height:100%;
  }

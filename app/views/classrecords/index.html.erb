@@ -13,7 +13,7 @@
   <tbody>
     <% @classrecords.each do |classrecord| %>
       <tr>
-        <td>$<%= number_with_precision(classrecord.cost || 0,:precision=>2) %></td>
+        <td><%= link_to number_to_currency(classrecord.cost), transactions_classrecord_path(:id=>classrecord.id) %></td>
         <td><%= classrecord.date %></td>
         <td><%= classrecord.location %></td>
         <td><%= link_to 'View students in this class', classrecord %></td>

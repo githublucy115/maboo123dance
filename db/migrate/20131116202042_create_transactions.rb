@@ -4,6 +4,8 @@ class CreateTransactions < ActiveRecord::Migration
       t.integer :student_id
       t.integer :classrecord_id
       t.decimal :amount
+      t.integer :credit
+      t.string :payment_method
 
       t.timestamps
     end

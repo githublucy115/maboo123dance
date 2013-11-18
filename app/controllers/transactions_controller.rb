@@ -8,12 +8,6 @@ class TransactionsController < ApplicationController
         a = "created_at"
         p.send(a) <=> e.send(a)
     }.reverse
-    @student_list = []
-    @class_list = []
-    @transactions.each do |t|
-      @student_list << Student.find(t.student_id).name
-      @class_list << Classrecord.find(t.classrecord_id).location
-    end
   end
 
   def student
@@ -26,10 +20,6 @@ class TransactionsController < ApplicationController
     @transactions.each do |t|
       @class_list << Classrecord.find(t.classrecord_id).location
     end
-  end
-
-  def pay
-    @expense = Transaction.find(params[:id])
   end
 
   # GET /transactions/1
@@ -51,12 +41,16 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @student = Student.find(@transaction.student_id)
-    @student.balance = @student.balance + @transaction.amount
+    if @transaction.payment_method == "credit"
+      @student.credit += @transaction.amount
+    elsif @transaction.payment_method == "cash"
+      @student.balance += @transaction.amount
+    end
     @student.save!
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to "students/#{@student.id}/transactions", notice: 'Transaction was successfully created.' }
+        format.html { redirect_to transactions_student_path(@student), notice: 'Transaction was successfully created.' }
         format.json { render action: 'show', status: :created, location: @transaction }
       else
         format.html { render action: 'new' }
@@ -97,6 +91,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:student_id, :classrecord_id, :amount)
+      params.require(:transaction).permit(:student_id, :classrecord_id, :amount, :credit)
     end
 end

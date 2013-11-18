@@ -12,15 +12,18 @@
 	<tbody>
 <% @transactions.each do |transaction| %>
 		<tr class=<%=transaction.amount<0 ? "expense" : "payment"%>>
-			<td><%= link_to @class_list.shift, "/classrecords/#{transaction.classrecord_id}"%></td>
+			<td><%= link_to @class_list.shift, transactions_classrecord_path(:id=>transaction.classrecord_id)%></td>
 			<td><%=transaction.created_at.to_time.strftime("%m/%d/%Y")%></td>
-			<td><%=number_to_currency(transaction.amount)%></td>
+			<td><%= transaction.payment_method == "credit" ? transaction.amount + " credits" : number_to_currency(transaction.amount) + " (paid by #{transaction.payment_method})" %></td>
 			<td>
-				<form action='/transactions' method='post'>
+				<form action="" method='post'>
 					<input type="hidden" name='transaction[student_id]' value=<%=transaction.student_id%> />
 					<input type="hidden" name='transaction[classrecord_id]' value=<%=transaction.classrecord_id%> />
 					$<input type='text', style='width:50px;' name='transaction[amount]' value='0' />
 					<input class='btn' type='submit' value='Make payment' name='commit'/>
+					<label class='checkbox'><input class='check_boxes optional' type='radio' value="cash" name='transaction[method]' checked='checked'/>By cash?</label>
+					<label class='checkbox'><input class='check_boxes optional' type='radio' value="check" name='transaction[method]'/>By check?</label>
+					<label class='checkbox'><input class='check_boxes optional' type='radio' value="card" name='transaction[method]'/>By card?</label>
 				</form>
 			</td>
 		</tr>

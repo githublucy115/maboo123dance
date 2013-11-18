@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20131116202042) do
     t.string   "email"
     t.decimal  "balance"
     t.integer  "credit"
+    t.string   "signature"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,6 +41,8 @@ ActiveRecord::Schema.define(version: 20131116202042) do
     t.integer  "student_id"
     t.integer  "classrecord_id"
     t.decimal  "amount"
+    t.integer  "credit"
+    t.string   "payment_method"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,15 +1,21 @@
 Maboo123dance::Application.routes.draw do
   resources :transactions
 
-  resources :classrecords
+  resources :classrecords do
+    member do
+      get :transactions, to: 'transactions#classrecord'
+      post :transactions, to: 'transactions#create'
+    end
+  end
 
   resources :students do
     member do
       get :transactions, to: 'transactions#student'
+      post :transactions, to: 'transactions#create'
     end
   end
 
-  root :to => "students#index"
+  root :to => redirect("/students")
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

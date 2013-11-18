@@ -5,6 +5,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :email
       t.decimal :balance
       t.integer :credit
+      t.string :signature
 
       t.timestamps
     end

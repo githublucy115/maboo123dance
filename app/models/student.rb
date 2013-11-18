@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
 	has_many :appointments
 	has_many :classrecords, through: :appointments
+	validates :name, :email, :signature, presence: true
 	def lastname
 		names = name.split
 		names.shift

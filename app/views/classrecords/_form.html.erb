@@ -14,5 +14,5 @@
   <%= f.input :cost %>
   <%= f.input :location %>
   <%= f.button :submit %>
-  <%= f.association :students, as: :check_boxes %>
+  <%= f.association :students, as: :check_boxes, collection: Student.order('name DESC') %>
 <% end %>

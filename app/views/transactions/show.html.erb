@@ -12,7 +12,8 @@
 
 <p>
   <strong>Amount:</strong>
-  <%= @transaction.amount %>
+  <% amount = @transaction.amount %>
+  <%= @transaction.method == "credit" ? @transaction.amount + " credits" : number_to_currency(@transaction.amount) + " (paid by #{@transaction.method})" %>
 </p>
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |
