@@ -30,8 +30,11 @@
       </tr>
     </thead>
     <tbody>
-      <% Student.all.each do |student| %>
-      <% unless student.classrecords.include?(@classrecord) %>
+      <% appointments = Appointment.where(classrecord_id: @classrecord.id) %>
+      <% students = [] %>
+      <% appointments.each {|a| students << a.student_id} %>
+      <% Student.select(:id,:name,:email,:balance,:credit).each do |student| %>
+      <% unless(students.include?(student.id)) %>
       <tr<%= student.in_debt? ? " class=unpaid" : "" %>>
         <td><input class="check_boxes optional" type="checkbox" name="classrecord[student_ids][]"<%="value=#{student.id}"%>></td>
         <td><%= link_to student.lastname, student %></td>

@@ -2,18 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table>tbody>tr.unpaid>td {
+table.table.table-striped.table-hover>tbody>tr.unpaid>td {
 	background-color: #FAA;
 }
 
-table>tbody>tr.unpaid:hover>td {
+table.table.table-striped.table-hover>tbody>tr.unpaid:hover>td {
 	background-color: #EAA;
 }
 
-table>tbody>tr.add-to>td {
+table.table.table-striped.table-hover>tbody>tr.add-to>td {
 	background-color: #AFA;
 }
 
-table>tbody>tr.add-to:hover>td {
+table.table.table-striped.table-hover>tbody>tr.add-to:hover>td {
 	background-color: #AEA;
 }

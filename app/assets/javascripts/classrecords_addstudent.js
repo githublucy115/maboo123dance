@@ -5,13 +5,14 @@ $(document).ready(function(){
 
 	$(document).on('change','input.check_boxes',function(){
 		row = $(this).closest('tr');
-		if($(this).is(':checked')){
-			row.appendTo('table.existing>tbody');
-			row.toggleClass('add-to');
-		}
-		else {
-			row.appendTo('form table>tbody');
-			row.toggleClass('add-to');
+		row.toggleClass('add-to');
+		if($('table.existing').size()>0){
+			if($(this).is(':checked')){
+				row.appendTo('table.existing>tbody');
+			}
+			else {
+				row.appendTo('form table>tbody');
+			}
 		}
 	});
 });
