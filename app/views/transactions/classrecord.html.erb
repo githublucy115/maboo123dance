@@ -1,10 +1,9 @@
-<h1>Transaction history</h1>
+<h1>Transaction history for class on <%=link_to @classrecord.date, @classrecord%></h1>
 
 <table id="transactions" class='table table-striped table-hover'>
 	<thead>
 		<tr>
-			<th>Dancer</th>
-			<th>Location</th>
+			<th>Student</th>
 			<th>Date</th>
 			<th>Amount</th>
 			<th></th>
@@ -12,18 +11,15 @@
 	</thead>
 	<tbody>
 <% @transactions.each do |transaction| %>
-<% student = Student.find(transaction.student_id) %>
-<% classrecord = Classrecord.find(transaction.classrecord_id) %>
-		<tr class=<%= transaction.type %>>
-			<td><%= link_to student.name, student %></td>
-			<td><%= link_to classrecord.location, classrecord %></td>
-			<td><%= transaction.date %></td>
+		<tr class=<%=transaction.amount<0 ? "expense" : "payment"%>>
+			<td><%= link_to Student.find(transaction.student_id).name, Student.find(transaction.student_id)%></td>
+			<td><%=transaction.created_at.to_time.strftime("%m/%d/%Y")%></td>
 			<td><%= transaction.payment_method == "credit" ? transaction.amount + " credits" : number_to_currency(transaction.amount) + " (paid by #{transaction.payment_method})" %></td>
 			<td>
 				<form action="" method='post'>
 					<input type="hidden" name='transaction[student_id]' value=<%=transaction.student_id%> />
 					<input type="hidden" name='transaction[classrecord_id]' value=<%=transaction.classrecord_id%> />
-					$<input type='text' style='width:50px;' name='transaction[amount]' value='0' />
+					$<input type='text', style='width:50px;' name='transaction[amount]' value='0' />
 					<input class='btn' type='submit' value='Make payment' name='commit'/>
 					<label class='checkbox'><input class='check_boxes optional' type='radio' value="cash" name='transaction[payment_method]' checked='checked'/>By cash?</label>
 					<label class='checkbox'><input class='check_boxes optional' type='radio' value="check" name='transaction[payment_method]'/>By check?</label>
@@ -31,6 +27,7 @@
 				</form>
 			</td>
 		</tr>
+		<%=	@classrecord_location %>
 <% end %>
 	</tbody>
 </table>

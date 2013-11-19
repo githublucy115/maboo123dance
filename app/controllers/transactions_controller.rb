@@ -16,10 +16,14 @@ class TransactionsController < ApplicationController
         a = "created_at"
         p.send(a) <=> e.send(a)
     }.reverse
-    @class_list = []
-    @transactions.each do |t|
-      @class_list << Classrecord.find(t.classrecord_id).location
-    end
+  end
+
+  def classrecord
+    @classrecord = Classrecord.find(params[:id])
+    @transactions = Transaction.where("classrecord_id = '#{params[:id]}'").sort {|p,e|
+      a = "created_at"
+      p.send(a) <=> e.send(a)
+    }.reverse
   end
 
   # GET /transactions/1
@@ -91,6 +95,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:student_id, :classrecord_id, :amount, :credit)
+      params.require(:transaction).permit(:student_id, :classrecord_id, :amount, :credit,:payment_method)
     end
 end

@@ -35,7 +35,7 @@ class ClassrecordsController < ApplicationController
         @classrecord.reload.students.each do |student|
           count += 1
           method = student.credit > 0 ? :credit : :cash
-          amount = method == :credit ? -1 : -@classrecord.cost
+          amount = method == :credit ? -1 : 0 - @classrecord.cost
           t = Transaction.create(
             :student_id=>student.id,
             :classrecord_id=>@classrecord.id,
@@ -48,7 +48,7 @@ class ClassrecordsController < ApplicationController
           student.save
         end
         #gb.lists.batch_subscribe(:id=>"0c97387b34",:batch=>gb_list)
-        format.html { redirect_to @classrecord, notice: 'Classrecord was successfully created.' }
+        format.html { redirect_to transactions_classrecord_path(@classrecord), notice: 'Classrecord was successfully created.' }
         format.json { render action: 'show', status: :created, location: @classrecord }
       else
         format.html { render action: 'new' }
@@ -62,6 +62,24 @@ class ClassrecordsController < ApplicationController
   def update
     respond_to do |format|
       if @classrecord.update(classrecord_params)
+        @classrecord.reload.students.each do |student|
+          unless Appointment.find_by(student_id: student.id, classrecord_id: @classrecord.id).exists?
+            count += 1
+            method = student.credit > 0 ? :credit : :cash
+            amount = method == :credit ? -1 : 0 - @classrecord.cost
+            t = Transaction.create(
+              :student_id=>student.id,
+              :classrecord_id=>@classrecord.id,
+              :amount=>amount,
+              :payment_method=>method
+              )
+            student.balance += t.amount if method == :cash
+            student.credit += t.credit if method == :credit
+            #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
+            student.save
+          end
+        end
+
         format.html { redirect_to @classrecord, notice: 'Classrecord was successfully updated.' }
         format.json { head :no_content }
       else

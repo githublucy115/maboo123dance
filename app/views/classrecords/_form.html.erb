@@ -1,18 +1,47 @@
-<%= simple_form_for(@classrecord) do |f| %>
-  <% if @classrecord.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@classrecord.errors.count, "error") %> prohibited this classrecord from being saved:</h2>
-
-      <ul>
-      <% @classrecord.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<h3>Add new dancers</h3>
+<form action="/classrecords" method="post">
+  <div class="form-group container">
+    <div class="col-sm-6">
+      <input type="text" class="form-control bagelfilter" placeholder="Search dancers to add to class">
     </div>
-  <% end %>
-
-  <%= f.input :cost %>
-  <%= f.input :location %>
-  <%= f.button :submit %>
-  <%= f.association :students, as: :check_boxes, collection: Student.order('name DESC') %>
-<% end %>
+  </div>
+  <div class="form-group container">
+    <% if current_page?(new_classrecord_path) %>
+    <div class="col-sm-2">
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type="text" class="form-control" placeholder="0.00" name="classrecord[cost]">
+      </div>
+    </div>
+    <% end %>
+    <div class="">
+      <button type='submit' class='btn btn-default' name='commit'>Submit</button>
+    </div>
+  </div>
+  <table class="table table-hover table-striped bagelfilter">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Email</th>
+        <th>Balance</th>
+        <th>Credit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Student.all.each do |student| %>
+      <% unless student.classrecords.include?(@classrecord) %>
+      <tr<%= student.in_debt? ? " class=unpaid" : "" %>>
+        <td><input class="check_boxes optional" type="checkbox" name="classrecord[student_ids][]"<%="value=#{student.id}"%>></td>
+        <td><%= link_to student.lastname, student %></td>
+        <td><%= link_to student.firstname, student %></td>
+        <td><%=student.email%></td>
+        <td><%= link_to number_to_currency(student.balance), transactions_student_path(:id=>student.id) %></td>
+        <td><%= link_to student.credit, transactions_student_path(:id=>student.id) %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</form>

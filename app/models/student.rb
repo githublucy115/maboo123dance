@@ -1,4 +1,5 @@
 class Student < ActiveRecord::Base
+	before_save :default_values
 	has_many :appointments
 	has_many :classrecords, through: :appointments
 	validates :name, :email, :signature, presence: true
@@ -16,5 +17,10 @@ class Student < ActiveRecord::Base
 	end
 	def in_debt?
 		return balance < 0
+	end
+	def default_values
+		self.balance ||= 0.0
+		self.credit ||= 0
+		self.signature ||= "/nosignature"
 	end
 end
