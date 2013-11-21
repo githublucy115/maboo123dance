@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	rows = $('form>table>tbody>tr');
-	rows.hide();
 	if(rows.length<=0) return;
 
 	$(document).on('change','input.check_boxes',function(){

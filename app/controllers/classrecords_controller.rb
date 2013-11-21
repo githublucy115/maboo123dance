@@ -51,6 +51,9 @@ class ClassrecordsController < ApplicationController
         format.html { redirect_to transactions_classrecord_path(@classrecord), notice: 'Classrecord was successfully created.' }
         format.json { render action: 'show', status: :created, location: @classrecord }
       else
+        if @classrecord.errors.any?
+          session[:classrecord_errors] = @classrecord.errors
+        end
         format.html { render action: 'new' }
         format.json { render json: @classrecord.errors, status: :unprocessable_entity }
       end

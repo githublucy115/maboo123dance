@@ -47,3 +47,4 @@ end
 gem 'simple_form'
 gem 'pry'
 gem 'gibbon'
+gem 'jquery-turbolinks'

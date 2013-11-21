@@ -47,7 +47,7 @@ class TransactionsController < ApplicationController
     @student = Student.find(@transaction.student_id)
     if @transaction.payment_method == "credit"
       @student.credit += @transaction.amount
-    elsif @transaction.payment_method == "cash"
+    elsif @transaction.payment_method == ("cash" || "credit")
       @student.balance += @transaction.amount
     end
     @student.save!
