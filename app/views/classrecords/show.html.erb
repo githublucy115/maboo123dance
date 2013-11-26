@@ -1,30 +1,4 @@
 <div class='span11'>
-	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %> <span class="badge"><%=number_to_currency(@classrecord.cost)%></span></h1><small><%= link_to "View transactions for this class", transactions_classrecord_path(:id=>@classrecord.id)%></small>
-	<h2><small>Students in class</small></h2>
-	<table class='table table-hover table-striped existing'>
-		<thead>
-			<tr>
-				<th></th>
-				<th>Last Name</th>
-				<th>First Name</th>
-				<th>Email</th>
-				<th>Balance</th>
-				<th>Credit</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @classrecord.students.each do |student| %>
-			<% student = Student.find(student) %>
-			<tr<%= student.in_debt? ? " class=unpaid" : "" %>>
-				<td></td>
-				<td><%= link_to student.lastname, student %></td>
-				<td><%= link_to student.firstname, student %></td>
-				<td><%=student.email%></td>
-				<td><%= link_to number_to_currency(student.balance), transactions_student_path(:id=>student.id) %></td>
-				<td><%= link_to student.credit, transactions_student_path(:id=>student.id) %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
+	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %></h1>
 	<%= render 'form' %>
 </div>

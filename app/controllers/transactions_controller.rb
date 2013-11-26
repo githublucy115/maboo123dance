@@ -66,9 +66,13 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
+    @student = Student.find(@transaction.student_id)
+    @classrecord = Classrecord.find(@transaction.classrecord_id)
+    @student.balance += @transaction.amount
+    @student.save!
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to transactions_classrecord_path(@classrecord), notice: 'Transaction was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -1,6 +1,7 @@
 $(document).ready(function(){
-	rows = $('form>table>tbody>tr');
+	rows = $('table.existing');
 	if(rows.length<=0) return;
+	$('input.check_boxes').attr('checked',false);
 
 	$(document).on('change','input.check_boxes',function(){
 		row = $(this).closest('tr');
@@ -10,7 +11,8 @@ $(document).ready(function(){
 				row.appendTo('table.existing>tbody');
 			}
 			else {
-				row.appendTo('form table>tbody');
+				row.appendTo('table.bagelfilter>tbody');
+				
 			}
 		}
 	});

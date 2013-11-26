@@ -3,7 +3,7 @@ class Transaction < ActiveRecord::Base
 		return number_to_currency(amount)
 	end
 	def type
-		return "expense" if amount < 0
+		return "expense" if payment_method == "unpaid"
 		return "payment"
 	end
 	def date

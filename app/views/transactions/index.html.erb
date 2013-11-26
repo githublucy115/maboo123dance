@@ -20,15 +20,7 @@
 			<td><%= transaction.date %></td>
 			<td><%= transaction.payment_method == "credit" ? transaction.amount + " credits" : number_to_currency(transaction.amount) + " (paid by #{transaction.payment_method})" %></td>
 			<td>
-				<form action="" method='post'>
-					<input type="hidden" name='transaction[student_id]' value=<%=transaction.student_id%> />
-					<input type="hidden" name='transaction[classrecord_id]' value=<%=transaction.classrecord_id%> />
-					$<input type='text' style='width:50px;' name='transaction[amount]' value='0' />
-					<input class='btn' type='submit' value='Make payment' name='commit'/>
-					<label class='checkbox'><input class='check_boxes optional' type='radio' value="cash" name='transaction[payment_method]' checked='checked'/>By cash?</label>
-					<label class='checkbox'><input class='check_boxes optional' type='radio' value="check" name='transaction[payment_method]'/>By check?</label>
-					<label class='checkbox'><input class='check_boxes optional' type='radio' value="card" name='transaction[payment_method]'/>By card?</label>
-				</form>
+				<%= render 'makepayment', :transaction => transaction %>
 			</td>
 		</tr>
 <% end %>

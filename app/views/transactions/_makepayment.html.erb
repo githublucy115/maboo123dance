@@ -1,0 +1,12 @@
+<% if transaction.type == "expense" %>
+<form action="" method='post'>
+	<input type="hidden" name='transaction[student_id]' value=<%=transaction.student_id%> />
+	<input type="hidden" name='transaction[classrecord_id]' value=<%=transaction.classrecord_id%> />
+	<input type='hidden' name='transaction[amount]' value=<%=0 - transaction.amount%> />
+	<input class='btn' type='submit' value='Make payment' name='commit'/>
+	<label class="checkbox"><input class="check_boxes optional" value="cash" name="transaction[payment_method]" type="radio">Paid with cash</label>
+	<label class="checkbox"><input class="check_boxes optional" value="card" name="transaction[payment_method]" type="radio">Paid with card</label>
+	<label class="checkbox"><input class="check_boxes optional" value="check" name="transaction[payment_method]" type="radio">Paid with check</label>
+	<label class="checkbox"><input class="check_boxes optional" value="guest" name="transaction[payment_method]" type="radio">Guest student</label>
+</form>
+<% end %>

@@ -28,13 +28,11 @@ class ClassrecordsController < ApplicationController
     @classrecord = Classrecord.new(classrecord_params)
     gb = Gibbon::API.new('a8a38b57426df6a6713f88035305f442-us3')
     gb_list = []
-    count = 0
 
     respond_to do |format|
       if @classrecord.save
         @classrecord.reload.students.each do |student|
-          count += 1
-          method = student.credit > 0 ? :credit : :cash
+          method = student.credit > 0 ? :dancecredit : :unpaid
           amount = method == :credit ? -1 : 0 - @classrecord.cost
           t = Transaction.create(
             :student_id=>student.id,
@@ -42,8 +40,11 @@ class ClassrecordsController < ApplicationController
             :amount=>amount,
             :payment_method=>method
             )
-          student.balance += t.amount if method == :cash
-          student.credit += t.credit if method == :credit
+          if method == :dancecredit
+            student.credit += t.amount
+          else
+            student.balance += t.amount
+          end
           #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
           student.save
         end
@@ -64,11 +65,14 @@ class ClassrecordsController < ApplicationController
   # PATCH/PUT /classrecords/1.json
   def update
     respond_to do |format|
+      students = []
+      Classrecord.find(@classrecord.id).students.each do |student|
+        students << student
+      end
       if @classrecord.update(classrecord_params)
-        @classrecord.reload.students.each do |student|
-          unless Appointment.find_by(student_id: student.id, classrecord_id: @classrecord.id).exists?
-            count += 1
-            method = student.credit > 0 ? :credit : :cash
+        @classrecord.students.each do |student|
+          unless students.include? student
+            method = student.credit > 0 ? :dancecredit : :unpaid
             amount = method == :credit ? -1 : 0 - @classrecord.cost
             t = Transaction.create(
               :student_id=>student.id,
@@ -76,8 +80,11 @@ class ClassrecordsController < ApplicationController
               :amount=>amount,
               :payment_method=>method
               )
-            student.balance += t.amount if method == :cash
-            student.credit += t.credit if method == :credit
+            if method == :dancecredit
+              student.credit += t.amount
+            else
+              student.balance += t.amount
+            end
             #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
             student.save
           end

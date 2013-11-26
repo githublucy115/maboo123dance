@@ -4,14 +4,14 @@ Maboo123dance::Application.routes.draw do
   resources :classrecords do
     member do
       get :transactions, to: 'transactions#classrecord'
-      post :transactions, to: 'transactions#create'
+      post :transactions, to: 'transactions#update'
     end
   end
 
   resources :students do
     member do
       get :transactions, to: 'transactions#student'
-      post :transactions, to: 'transactions#create'
+      post :transactions, to: 'transactions#update'
     end
   end
 
