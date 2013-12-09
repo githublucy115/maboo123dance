@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131116202042) do
-
-  create_table "appointments", force: true do |t|
-    t.integer  "student_id"
-    t.integer  "classrecord_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20131209195241) do
 
   create_table "classrecords", force: true do |t|
     t.decimal  "cost"
@@ -26,6 +19,34 @@ ActiveRecord::Schema.define(version: 20131116202042) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "classrecords_students", force: true do |t|
+    t.integer "classrecord_id"
+    t.integer "student_id"
+  end
+
+  add_index "classrecords_students", ["classrecord_id"], name: "index_classrecords_students_on_classrecord_id"
+  add_index "classrecords_students", ["student_id"], name: "index_classrecords_students_on_student_id"
+
+  create_table "expenses", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "classrecord_id"
+    t.decimal  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "expenses", ["student_id"], name: "index_expenses_on_student_id"
+
+  create_table "payments", force: true do |t|
+    t.integer  "expense_id"
+    t.decimal  "amount"
+    t.string   "payment_method"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["expense_id"], name: "index_payments_on_expense_id"
 
   create_table "students", force: true do |t|
     t.string   "name"

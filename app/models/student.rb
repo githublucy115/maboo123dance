@@ -1,6 +1,6 @@
 class Student < ActiveRecord::Base
 	before_save :default_values
-	has_many :classrecords
+	has_and_belongs_to_many :classrecords
 	has_many :expenses
 	validates :name, :email, :signature, presence: true
 	def lastname
