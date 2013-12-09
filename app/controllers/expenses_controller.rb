@@ -69,6 +69,6 @@ class ExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_params
-      params.require(:expense).permit(:student_id, :classorder_id, :amount)
+      params.require(:expense).permit(:student_id, :classrecord_id, :amount)
     end
 end

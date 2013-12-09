@@ -1,7 +1,7 @@
 class Student < ActiveRecord::Base
 	before_save :default_values
-	has_many :appointments
-	has_many :classrecords, through: :appointments
+	has_many :classrecords
+	has_many :expenses
 	validates :name, :email, :signature, presence: true
 	def lastname
 		names = name.split
