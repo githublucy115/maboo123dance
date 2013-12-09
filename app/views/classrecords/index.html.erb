@@ -3,9 +3,8 @@
 <table id="boot" class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>Cost</th>
       <th>Date</th>
-      <th>Location</th>
+      <th>Cost</th>
       <th></th>
     </tr>
   </thead>
@@ -13,9 +12,8 @@
   <tbody>
     <% @classrecords.each do |classrecord| %>
       <tr>
-        <td><%= link_to number_to_currency(classrecord.cost), transactions_classrecord_path(:id=>classrecord.id) %></td>
         <td><%= classrecord.date %></td>
-        <td><%= classrecord.location %></td>
+        <td><%= link_to number_to_currency(classrecord.cost), transactions_classrecord_path(:id=>classrecord.id) %></td>
         <td><%= link_to 'View students in this class', classrecord %></td>
       </tr>
     <% end %>

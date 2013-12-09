@@ -3,9 +3,8 @@
 <table id='boot' class='table table-hover table-striped bagelfilter'>
 	<thead>
 		<tr>
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Email</th>
+			<th>Name</th>
+			<th><!-- Email --></th>
 			<th>Balance</th>
 			<th>Dance Credit</th>
 		</tr>
@@ -13,9 +12,8 @@
 	<tbody>
 		<% @students.each do |student| %>
 		<tr<%=student.in_debt? ? " class=unpaid" : "" %>>
-			<td><%= link_to student.lastname, student %></td>
-			<td><%= link_to student.firstname, student %></td>
-			<td><%= student.email %></td>
+			<td><%= link_to [student.lastname,student.firstname].join(', '), student %></td>
+			<td><!--  <%= student.email %>  --></td>
 			<td><%= link_to number_to_currency(student.balance), "/students/#{student.id}/transactions" %></td>
 			<td><%= student.credit %></td>
 		</tr>

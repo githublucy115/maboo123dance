@@ -23,3 +23,11 @@ table#boot>tbody>tr.unpaid:hover>td {
  #content>div {
  	padding-bottom: 80px;
  }
+
+ table {
+ 	table-layout: fixed;
+ }
+
+ .smallcol {
+ 	width: 30px;
+ }
