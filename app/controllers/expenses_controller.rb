@@ -40,6 +40,7 @@ class ExpensesController < ApplicationController
             :payment_method => :dancecredit
           )
           student.balance += expense.amount
+          student.credit -= 1
         end
       end
       student.save!

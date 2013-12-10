@@ -30,11 +30,11 @@
     <td>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-        <input type="text" class="form-control" placeholder="0.00" name="payment[amount]">
+        <input type="number" class="form-control" placeholder="0.00" name="payment[amount]" required>
       </div>
     </td>
     <td>
-      <input type="text" class="form-control" placeholder="(e.g. Cash)" name="payment[payment_method]">
+      <input type="text" class="form-control" placeholder="(e.g. Cash)" name="payment[payment_method]" required>
   	</td>
   	<td><button type='submit' class='btn btn-primary'>Make payment</button></td>
   </tr>
