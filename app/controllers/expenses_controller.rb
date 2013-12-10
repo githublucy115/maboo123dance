@@ -47,13 +47,6 @@ class ExpensesController < ApplicationController
     end
     respond_to do |format|
       if @expense.save
-        if @expense.classrecord_id < 0
-          Payment.create(
-            :expense_id => @expense.reload.id,
-            :amount => @expense.amount,
-            :payment_method => :dancecard
-          )
-        end
         format.html { redirect_to @expense.student, notice: 'Credit was successfully updated.' }
         format.json { head :no_content }
       else
