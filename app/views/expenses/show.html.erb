@@ -43,7 +43,7 @@
   <tr>
     <td><%= payment.date %></td>
     <td><%= number_to_currency payment.amount %></td>
-    <td><%= payment.payment_method.capitalize %></td>
+    <td><%= payment.payment_method != "" && payment.payment_method.capitalize || "Cash" %></td>
     <td>
 <!--       < %= render 'makepayment', :expense => expense %>
  -->    </td>
