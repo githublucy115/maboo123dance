@@ -1,6 +1,8 @@
 Maboo123dance::Application.routes.draw do
   resources :expenses
 
+  post :payments, :controller => :payments, :action => :create
+
   resources :classrecords do
     get :expenses, to: 'expenses#classrecord', :on => :member
   end
