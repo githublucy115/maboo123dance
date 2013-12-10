@@ -17,14 +17,14 @@
       <td><%= link_to ["Class on",classrecord.date].join(' '), classrecord %></td>
       <td><%= expense.date %></td>
       <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join ' / ' %></td>
-      <td>Make payment</td>
+      <td><span class='badge'><%=link_to "Details", expense_path(expense)%></span></td>
     </tr>
 <% else %>
     <tr<%=expense.paid < expense.amount && ' class=unpaid' || nil %>>
       <td><%=0 - expense.classrecord_id%> dance credits</td>
       <td><%= expense.date %></td>
       <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join ' / ' %></td>
-      <td>Make payment</td>
+      <td><span class='badge'><%=link_to "Details", expense_path(expense)%></span></td>
     </tr>        
 <% end %>
 <% end %>

@@ -9,7 +9,10 @@
     </ul>
   </div>
 <% end %>
-  <form action="/students/" role="form" method="post" class="form-horizontal">
+  <form action=<%=current_page?(@student) && student_path(@student) || students_path%> role="form" method="post" class="form-horizontal">
+    <% if current_page?(@student)%>
+    <input name="_method" type="hidden" value="patch" />
+    <%end%>
     <div class='span8'>
       <%if current_page? @student %>
       <input type='hidden' name='student[signature]' <%="value=#{@student.signature}"%>>

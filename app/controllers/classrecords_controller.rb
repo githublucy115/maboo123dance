@@ -44,6 +44,7 @@ class ClassrecordsController < ApplicationController
               :payment_method => :dancecredit
             )
             student.credit -= 1
+            student.balance += t.amount
           end
           student.balance -= t.amount
           #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}

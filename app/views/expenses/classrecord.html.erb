@@ -18,7 +18,7 @@
       <td><%= link_to student.name, student %></td>
       <td><%= expense.date %></td>
       <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join ' / ' %></td>
-      <td>Make payment</td>
+      <td><span class='badge'><%=link_to "Details", expense_path(expense)%></span></td>
     </tr>
 <% end %>
   </tbody>
