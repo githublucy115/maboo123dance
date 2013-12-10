@@ -14,7 +14,7 @@
       <tr>
         <td><%= classrecord.date %></td>
         <td><%= link_to number_to_currency(classrecord.cost), expenses_classrecord_path(:id=>classrecord.id) %></td>
-        <td><%= link_to 'View students in this class', classrecord %></td>
+        <td><%= link_to "View all #{classrecord.students.size} students in this class", classrecord %></td>
       </tr>
     <% end %>
   </tbody>

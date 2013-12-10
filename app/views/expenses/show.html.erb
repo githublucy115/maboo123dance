@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <% classrecord = @expense.classrecord_id %>
 <h1>Payment details</h1>
-<p><strong>Paid by:</strong> <%=@expense.student.name%></p>
+<p><strong>Paid by:</strong> <%=link_to @expense.student.name, student_path(@expense.student)%></p>
 <p><strong>Purchase:</strong> 
   <%if classrecord < 0%>
   <%="#{0 - classrecord} dance credits"%>
