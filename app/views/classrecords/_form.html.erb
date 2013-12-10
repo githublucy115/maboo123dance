@@ -30,8 +30,8 @@
         <td><input class="check_boxes optional" type="hidden" name="classrecord[student_ids][]"<%="value=#{student.id}"%>></td>
         <td><%= link_to [student.lastname,student.firstname].join(', '), student %></td>
         <td><!--  <%=student.email%>  --></td>
-        <td><%= link_to number_to_currency(student.balance), transactions_student_path(:id=>student.id) %></td>
-        <td><%= link_to student.credit, transactions_student_path(:id=>student.id) %></td>
+        <td><%= link_to number_to_currency(student.balance), expenses_student_path(:id=>student.id) %></td>
+        <td><%= link_to student.credit, expenses_student_path(:id=>student.id) %></td>
       </tr>
       <% end %>
     </tbody>
@@ -76,8 +76,8 @@
         <td><input class="check_boxes optional" type="checkbox" name="classrecord[student_ids][]"<%="value=#{student.id}"%>></td>
         <td><%= link_to [student.lastname,student.firstname].join(', '), student %></td>
         <td><!--%=student.email%--></td>
-        <td><%= link_to number_to_currency(student.balance), transactions_student_path(:id=>student.id) %></td>
-        <td><%= link_to student.credit, transactions_student_path(:id=>student.id) %></td>
+        <td><%= link_to number_to_currency(student.balance), expenses_student_path(:id=>student.id) %></td>
+        <td><%= link_to student.credit, expenses_student_path(:id=>student.id) %></td>
       </tr>
       <% end %>
       <% end %>

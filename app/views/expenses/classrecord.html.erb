@@ -1,10 +1,9 @@
-<h1>Payment history</h1>
+<h1>Expense history for <%=link_to "class at #{@classrecord.location} on #{@classrecord.date}", @classrecord%></h1>
 
-<table id="expenses" class='table table-striped table-hover'>
+<table id="expenses" class='table table-fixed table-striped table-hover'>
   <thead>
     <tr>
       <th>Dancer</th>
-      <th>Purchase</th>
       <th>Date</th>
       <th>Amount</th>
       <th></th>
@@ -12,11 +11,11 @@
   </thead>
   <tbody>
 <% @expenses.each do |expense| %>
+<% next if expense.classrecord_id == -1 %>
 <% student = expense.student %>
 <% classrecord = Classrecord.find(expense.classrecord_id) %>
     <tr>
       <td><%= link_to student.name, student %></td>
-      <td><%= link_to ["Class on",classrecord.date].join(' '), classrecord %></td>
       <td><%= expense.date %></td>
       <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join '/' %></td>
       <td>Make payment</td>

@@ -1,20 +1,12 @@
 Maboo123dance::Application.routes.draw do
   resources :expenses
 
-  resources :transactions
-
   resources :classrecords do
-    member do
-      get :transactions, to: 'transactions#classrecord'
-      post :transactions, to: 'transactions#update'
-    end
+    get :expenses, to: 'expenses#classrecord', :on => :member
   end
 
   resources :students do
-    member do
-      get :transactions, to: 'transactions#student'
-      post :transactions, to: 'transactions#update'
-    end
+    get :expenses, to: 'expenses#student', :on => :member
   end
 
   root :to => redirect("/students")

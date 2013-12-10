@@ -13,7 +13,7 @@
     <% @classrecords.each do |classrecord| %>
       <tr>
         <td><%= classrecord.date %></td>
-        <td><%= link_to number_to_currency(classrecord.cost), transactions_classrecord_path(:id=>classrecord.id) %></td>
+        <td><%= link_to number_to_currency(classrecord.cost), expenses_classrecord_path(:id=>classrecord.id) %></td>
         <td><%= link_to 'View students in this class', classrecord %></td>
       </tr>
     <% end %>

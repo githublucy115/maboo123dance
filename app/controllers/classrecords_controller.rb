@@ -32,24 +32,24 @@ class ClassrecordsController < ApplicationController
     respond_to do |format|
       if @classrecord.save
         @classrecord.reload.students.each do |student|
-          method = student.credit > 0 ? :dancecredit : :unpaid
-          amount = method == :credit ? -1 : 0 - @classrecord.cost
-          t = Transaction.create(
+          t = Expense.create(
             :student_id=>student.id,
             :classrecord_id=>@classrecord.id,
-            :amount=>amount,
-            :payment_method=>method
+            :amount=>@classrecord.cost,
             )
-          if method == :dancecredit
-            student.credit += t.amount
-          else
-            student.balance += t.amount
+          if student.credit > 0
+            p = Payment.create(
+              :expense_id => t.id,
+              :amount => t.amount,
+              :payment_method => :dancecredit
+            )
           end
+          student.balance -= t.amount
           #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
           student.save
         end
         #gb.lists.batch_subscribe(:id=>"0c97387b34",:batch=>gb_list)
-        format.html { redirect_to transactions_classrecord_path(@classrecord), notice: 'Classrecord was successfully created.' }
+        format.html { redirect_to expenses_path, notice: 'Classrecord was successfully created.' }
         format.json { render action: 'show', status: :created, location: @classrecord }
       else
         if @classrecord.errors.any?
