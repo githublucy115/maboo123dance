@@ -26,11 +26,6 @@
           <input type="email" class="form-control" id="student_email" placeholder="(e.g. joesmith@gmail.com)" name="student[email]" value="<%=@student.email%>">
         </div>
       </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" name="commit"><%=current_page?(@student) ? "Update" : "Create"%> student</button>
-        </div>
-      </div>
       <%if current_page? @student %>
       <input type='hidden' name='student[signature]' <%="value=#{@student.signature}"%>>
       <%else%>
@@ -42,5 +37,10 @@
         </div>
       </div>
       <%end%>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" name="commit"><%=current_page?(@student) ? "Update" : "Create"%> student</button>
+        </div>
+      </div>
     </div>
   </form>
