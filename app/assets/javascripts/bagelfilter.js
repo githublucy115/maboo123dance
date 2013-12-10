@@ -6,7 +6,7 @@ $(document).ready(function(){
 		console.log(terms=="")
 		rows.hide();
 		rows.each(function(){
-			if($(this).text().toLowerCase().indexOf(terms)>-1 || terms==""){
+			if($(this).text().toLowerCase().indexOf(terms.toLowerCase())>-1 || terms==""){
 				$(this).show();
 			}
 		});
