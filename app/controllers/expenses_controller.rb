@@ -4,7 +4,7 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @Expenses = Expense.all.sort {|p,e|
+    @expenses = Expense.all.sort {|p,e|
         a = "created_at"
         p.send(a) <=> e.send(a)
     }.reverse
@@ -12,7 +12,7 @@ class ExpensesController < ApplicationController
 
   def student
     @student = Student.find(params[:id])
-    @Expenses = Expense.where("student_id = '#{params[:id]}'").sort {|p,e|
+    @expenses = Expense.where("student_id = '#{params[:id]}'").sort {|p,e|
         a = "created_at"
         p.send(a) <=> e.send(a)
     }.reverse
