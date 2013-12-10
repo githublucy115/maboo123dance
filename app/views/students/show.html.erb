@@ -1,11 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <% data = { :Name => @student.name, :Email => @student.email, :Balance => number_to_currency(@student.balance), :Credit => @student.credit} %>
-<% data.each do |label,val| %>
-<p>
-  <strong><%=label%>:</strong>
-  <%= val %>
-</p>
-<% end %>
-
+<h1>Student info <span class='badge'><%=link_to "#{@student.credit} credits", expenses_student_path(@student)%></span> <span class='badge'><%=link_to number_to_currency(@student.balance), expenses_student_path(@student)%></span></h1><br/>
+<% [6,12].each do |n| %>
+<form action='/expenses' method='post'>
+  <div class='form-group'>
+    <input type='hidden' name='expense[student_id]' <%="value=#{@student.id}"%>>
+    <input type='hidden' name='expense[classrecord_id]' <%="value=#{0 - n}"%>>
+    <button type='submit' class="btn btn-primary">Add <%=n.to_s%> Dance Credits</button>
+    <div class='col-sm-3'>
+      <div class="input-group">
+        <span class="input-group-addon">$</span>
+        <input type='text' class="form-control" placeholder="0.00" name='expense[amount]' <%="value=#{n == 6 && 80.00 || n == 12 && 150.00}"%>>
+      </div>
+    </div>
+  </div>
+</form>
+<%end%>
 <img src=<%= @student.signature %>>
+<%= render 'form' %>

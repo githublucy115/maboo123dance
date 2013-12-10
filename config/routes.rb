@@ -7,6 +7,8 @@ Maboo123dance::Application.routes.draw do
 
   resources :students do
     get :expenses, to: 'expenses#student', :on => :member
+    get :add6, to: 'students#add6', :on => :member
+    get :add12, to: 'students#add12', :on => :member
   end
 
   root :to => redirect("/students")

@@ -14,10 +14,10 @@
 <% next if expense.classrecord_id == -1 %>
 <% student = expense.student %>
 <% classrecord = Classrecord.find(expense.classrecord_id) %>
-    <tr>
+    <tr<%=expense.paid < expense.amount && ' class=unpaid' || nil %>>
       <td><%= link_to student.name, student %></td>
       <td><%= expense.date %></td>
-      <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join '/' %></td>
+      <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join ' / ' %></td>
       <td>Make payment</td>
     </tr>
 <% end %>

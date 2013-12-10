@@ -14,7 +14,7 @@
 		<tr<%=student.in_debt? ? " class=unpaid" : "" %>>
 			<td><%= link_to [student.lastname,student.firstname].join(', '), student %></td>
 			<td><!--  <%= student.email %>  --></td>
-			<td><%= link_to number_to_currency(student.balance), "/students/#{student.id}/transactions" %></td>
+			<td><%= link_to number_to_currency(student.balance), "/students/#{student.id}/expenses" %></td>
 			<td><%= student.credit %></td>
 		</tr>
 		<% end %>

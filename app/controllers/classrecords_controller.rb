@@ -43,6 +43,7 @@ class ClassrecordsController < ApplicationController
               :amount => t.amount,
               :payment_method => :dancecredit
             )
+            student.credit -= 1
           end
           student.balance -= t.amount
           #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
@@ -72,19 +73,20 @@ class ClassrecordsController < ApplicationController
       if @classrecord.update(classrecord_params)
         @classrecord.students.each do |student|
           unless students.include? student
-            method = student.credit > 0 ? :dancecredit : :unpaid
-            amount = method == :credit ? -1 : 0 - @classrecord.cost
-            t = Transaction.create(
+            t = Expense.create(
               :student_id=>student.id,
               :classrecord_id=>@classrecord.id,
-              :amount=>amount,
-              :payment_method=>method
+              :amount=>@classrecord.cost,
               )
-            if method == :dancecredit
-              student.credit += t.amount
-            else
-              student.balance += t.amount
+            if student.credit > 0
+              p = Payment.create(
+                :expense_id => t.id,
+                :amount => t.amount,
+                :payment_method => :dancecredit
+              )
+              student.credit -= 1
             end
+            student.balance -= t.amount
             #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
             student.save
           end

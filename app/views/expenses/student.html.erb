@@ -1,9 +1,8 @@
-<h1>Payment history</h1>
+<h1>Expense history for <%=link_to @student.name, @student%></h1>
 
 <table id="expenses" class='table table-striped table-hover'>
   <thead>
     <tr>
-      <th>Dancer</th>
       <th>Purchase</th>
       <th>Date</th>
       <th>Amount</th>
@@ -12,15 +11,22 @@
   </thead>
   <tbody>
 <% @expenses.each do |expense| %>
-<% student = expense.student %>
+<% if expense.classrecord_id > 0 %>
 <% classrecord = Classrecord.find(expense.classrecord_id) %>
     <tr<%=expense.paid < expense.amount && ' class=unpaid' || nil %>>
-      <td><%= link_to student.name, student %></td>
       <td><%= link_to ["Class on",classrecord.date].join(' '), classrecord %></td>
       <td><%= expense.date %></td>
       <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join ' / ' %></td>
       <td>Make payment</td>
     </tr>
+<% else %>
+    <tr<%=expense.paid < expense.amount && ' class=unpaid' || nil %>>
+      <td><%=0 - expense.classrecord_id%> dance credits</td>
+      <td><%= expense.date %></td>
+      <td><%= [number_to_currency(expense.paid),number_to_currency(expense.amount)].join ' / ' %></td>
+      <td>Make payment</td>
+    </tr>        
+<% end %>
 <% end %>
   </tbody>
 </table>

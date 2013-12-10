@@ -26,6 +26,35 @@ class ExpensesController < ApplicationController
     }.reverse
   end
 
+  # POST /expenses
+  def create
+    @expense = Expense.new(expense_params)
+    if @expense.classrecord_id < 0
+      student = @expense.student
+      student.credit -= @expense.classrecord_id
+      student.expenses.each do |expense|
+        if expense.paid == 0 && expense.classrecord_id > 0
+          Payment.create(
+            :expense_id => expense.id,
+            :amount => expense.amount,
+            :payment_method => :dancecredit
+          )
+          student.balance += expense.amount
+        end
+      end
+      student.save!
+    end
+    respond_to do |format|
+      if @expense.save
+        format.html { redirect_to @expense.student, notice: 'Credit was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /expenses/1
   # GET /expenses/1.json
   def show
