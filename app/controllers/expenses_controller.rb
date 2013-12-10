@@ -32,6 +32,7 @@ class ExpensesController < ApplicationController
     if @expense.classrecord_id < 0
       student = @expense.student
       student.credit -= @expense.classrecord_id
+      student.balance -= @expense.amount
       student.expenses.each do |expense|
         if expense.paid == 0 && expense.classrecord_id > 0
           Payment.create(
@@ -39,7 +40,6 @@ class ExpensesController < ApplicationController
             :amount => expense.amount,
             :payment_method => :dancecredit
           )
-          student.balance -= @expense.amount
           student.credit -= 1
         end
       end
