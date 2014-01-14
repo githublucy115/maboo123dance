@@ -1,0 +1,7 @@
+<%= render 'waiver' %>
+<p><strong>Full Name:</strong> <%=@student.name%></p>
+<p><strong>Date:</strong> <%=@student.created_at.strftime("%B %d, %Y")%></p>
+<p><strong>Email address:</strong> <%=@student.email%></p>
+<p><strong>Signature:</strong></p>
+
+<img src=<%= @student.signature %>>

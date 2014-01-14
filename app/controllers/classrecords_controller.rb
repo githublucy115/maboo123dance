@@ -1,5 +1,5 @@
 class ClassrecordsController < ApplicationController
-  before_action :set_classrecord, only: [:show, :edit, :update, :destroy]
+  before_action :set_classrecord, only: [:show, :edit, :update, :destroy, :printable]
 
   # GET /classrecords
   # GET /classrecords.json
@@ -37,15 +37,6 @@ class ClassrecordsController < ApplicationController
             :classrecord_id=>@classrecord.id,
             :amount=>@classrecord.cost,
             )
-          if student.credit > 0
-            p = Payment.create(
-              :expense_id => t.id,
-              :amount => t.amount,
-              :payment_method => :dancecredit
-            )
-            student.credit -= 1
-            student.balance += t.amount
-          end
           student.balance -= t.amount
           #gb_list << {:EMAIL=>{:email=>student.email},:FNAME=>student.firstname,:LNAME=>student.lastname}
           student.save

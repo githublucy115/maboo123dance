@@ -5,10 +5,12 @@ Maboo123dance::Application.routes.draw do
 
   resources :classrecords do
     get :expenses, to: 'expenses#classrecord', :on => :member
+    get :printable, to: 'classrecords#printable', :on => :member
   end
 
   resources :students do
     get :expenses, to: 'expenses#student', :on => :member
+    get :waiver, to: 'students#waiver', :on => :member
   end
 
   root :to => redirect("/students")

@@ -1,4 +1,9 @@
 <div class='span11'>
-	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %> <span class="badge"><%=number_to_currency(@classrecord.cost)%></span></h1><small><%= link_to "View expenses for this class", expenses_classrecord_path(:id=>@classrecord.id)%></small></h1>
+	<h1>Attendance sheet for <%= @classrecord.created_at.to_time.strftime("%m/%d/%Y") %> <span class="badge"><%=number_to_currency(@classrecord.cost)%></span></h1>
+	<small><%= link_to "View expenses for this class", expenses_classrecord_path(:id=>@classrecord.id)%></small>
+	<br/>
+	<small><%= link_to "Printable list of students", printable_classrecord_path(@classrecord)%></small>
+	<br/>
+	<small>Total Revenue for this class: <%= number_to_currency @classrecord.total_revenue%></small>
 	<%= render 'form' %>
 </div>

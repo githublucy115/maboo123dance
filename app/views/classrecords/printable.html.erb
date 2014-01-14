@@ -1,0 +1,11 @@
+<style>
+	#header, #sidebar{
+		display:none;
+	}
+	body{
+		padding-top: 20px;
+	}
+</style>
+<% @classrecord.students.each do |student| %>
+<p><strong><%=student.name%></strong></p>
+<%end%>
