@@ -30,16 +30,17 @@
     <td>
       <div class="input-group">
         <span class="input-group-addon">$</span>
-        <input type="number" class="form-control" placeholder="0.00" name="payment[amount]">
+        <input type="number" id="payment_amount" class="form-control" placeholder="0.00" name="payment[amount]">
       </div>
     </td>
     <td>
-      <select name="payment[payment_method]">
+      <select name="payment[payment_method]" class="form-control" id="payment_method">
         <option value="cash">Cash</option>
         <option value="check">Check</option>
         <option value="card">Credit Card</option>
         <option value="dancecredit">Dance Credit</option>
         <option value="guest">Guest</option>
+        <option value="undo">Undo expense</option>
       </select>
       <!-- <input type="text" class="form-control" placeholder="(e.g. Cash)" name="payment[payment_method]" required> -->
   	</td>

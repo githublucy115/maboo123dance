@@ -1,4 +1,11 @@
-<%= render 'waiver' %>
+<style>
+	#header, #sidebar{
+		display:none;
+	}
+	body{
+		padding-top: 20px;
+	}
+</style><%= render 'waiver' %>
 <p><strong>Full Name:</strong> <%=@student.name%></p>
 <p><strong>Date:</strong> <%=@student.created_at.strftime("%B %d, %Y")%></p>
 <p><strong>Email address:</strong> <%=@student.email%></p>

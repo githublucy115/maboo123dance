@@ -7,7 +7,7 @@ class Classrecord < ActiveRecord::Base
 	end
 
 	def expenses
-		e = Expense.where(:classrecord_id=>Classrecord.first.id)
+		e = Expense.where(:classrecord_id=>id)
 		e = e.select{|p|p.payments.size>0 and not
 			p.payments.last.payment_method == "dancecredit" and not
 			p.payments.last.payment_method == "guest"
@@ -23,6 +23,6 @@ class Classrecord < ActiveRecord::Base
 	end
 
 	def total_revenue
-		payments.sum.map{|e|e.amount}.sum
+		payments.sum.map{|e|e.amount}.sum rescue 0
 	end
 end

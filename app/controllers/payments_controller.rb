@@ -2,13 +2,26 @@ class PaymentsController < ApplicationController
   # POST /expenses
   def create
     @payment = Payment.new(payment_params)
-    student = @payment.expense.student
-    if @payment.payment_method == 'dancecredit' or @payment.payment_method == 'guest'
-      @payment.amount = @payment.expense.amount - @payment.expense.paid
-      student.credit -= 1 if @payment.payment_method == 'dancecredit'
-    end
     respond_to do |format|
-      if @payment.save
+      student = @payment.expense.student
+      if @payment.payment_method == 'dancecredit' or @payment.payment_method == 'guest'
+        @payment.amount = @payment.expense.amount - @payment.expense.paid
+        student.credit -= 1 if @payment.payment_method == 'dancecredit'
+      end
+      if @payment.payment_method == 'undo'
+        expense = @payment.expense
+        if expense.classrecord_id < 0
+          student.credit += expense.classrecord_id
+          student.balance += expense.amount
+          student.save!
+          expense.destroy
+          format.html { redirect_to student, notice: 'Expense was successfully deleted.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to @payment.expense, notice: 'Expense was successfully deleted.' }
+          format.json { head :no_content }
+        end
+      elsif @payment.save
         student.balance += @payment.amount
         student.save! 
         format.html { redirect_to @payment.expense, notice: 'Payment was successfully created.' }
