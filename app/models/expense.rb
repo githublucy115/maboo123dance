@@ -10,7 +10,7 @@ class Expense < ActiveRecord::Base
   def paid
   	paid = 0
   	payments.each do |payment|
-  		paid += payment.amount
+  		paid += payment.amount || 0
   	end
   	paid
   end
