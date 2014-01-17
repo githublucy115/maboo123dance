@@ -3,7 +3,8 @@ class Classrecord < ActiveRecord::Base
 	validates :cost, presence: true
 
 	def date
-		created_at.to_time.strftime("%m/%d/%Y")
+		pst = created_at.to_time.utc + Time.zone_offset("PST")
+		pst.strftime("%m/%d/%Y")
 	end
 
 	def expenses
