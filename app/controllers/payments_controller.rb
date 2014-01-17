@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   # POST /expenses
   def create
     @payment = Payment.new(payment_params)
+    @payment.amount = 0 if @payment.amount.nil?
     respond_to do |format|
       student = @payment.expense.student
       if @payment.payment_method == 'dancecredit' or @payment.payment_method == 'guest'
