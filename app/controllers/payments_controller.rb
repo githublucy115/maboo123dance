@@ -5,6 +5,7 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       student = @payment.expense.student
       if @payment.payment_method == 'dancecredit' or @payment.payment_method == 'guest'
+        student.balance += @payment.expense.amount if @payment.payment_method == 'dancecredit'
         @payment.amount = @payment.expense.amount - @payment.expense.paid
         student.credit -= 1 if @payment.payment_method == 'dancecredit'
       end
